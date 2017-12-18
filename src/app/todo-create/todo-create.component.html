@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+
+      <form (ngSubmit)="onSubmit()" #f="ngForm">
+
+        <div class="form-group">
+          <label for="id">Id </label>
+          <input id="id" name="id" class="form-control" type="text" ngModel/>
+        </div>
+
+        <div class="form-group">
+          <label for="name">Name </label>
+          <input id="name" name="name" class="form-control" type="text" ngModel required>
+        </div>
+
+        <div class="form-group">
+          <label for="desc">Desc </label>
+          <input id="desc" name="desc" class="form-control" type="text" ngModel email #desc="ngModel">
+          <span class="help-block" *ngIf="!desc.valid && desc.touched"> Please enter valid data</span>
+        </div>
+        <div class="form-group">
+          <button [disabled]="formCreateTodo.invalid" type="submit" class="btn btn-primary">Create Todo</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>

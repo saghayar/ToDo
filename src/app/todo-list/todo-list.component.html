@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-5">
+      <ul class="list-group" *ngFor="let todo of todos">
+        <li class="list-group-item"
+            (click)="onSelectTodo(todo)"
+            [ngClass]="{'selectedItem': selectedTodo.id===todo.id}">
+          {{todo.name}}
+          <!--<a routerLinkActive="active" [routerLink]="todo.id"> {{todo.name}}</a>-->
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+
+      <a class="btn btn-primary" routerLinkActive="active" [routerLink]="selectedTodo.id">Show Details</a>
+      of {{selectedTodo.name}}
+    </div>
+  </div>
+</div>
