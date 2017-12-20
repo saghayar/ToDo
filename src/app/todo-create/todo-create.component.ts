@@ -1,9 +1,10 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {LoggingServiceService} from '../logging-service.service';
 import {NgForm} from '@angular/forms';
-import {TodoServiceService} from '../todo-service.service';
-import {Todo} from '../todo';
+import {Todo} from '../shared/todo';
 import {Router} from '@angular/router';
+import {Store} from '@ngrx/store';
+import {AppState} from '../reducers/app.reducers';
+import {AddTodo} from '../todo-list/store/actions/todo-list.actions';
 
 @Component({
   selector: 'app-todo-create',
@@ -15,8 +16,7 @@ export class TodoCreateComponent implements OnInit {
   todo: Todo;
   @ViewChild('f') formCreateTodo: NgForm;
 
-  constructor(private  todoService: TodoServiceService,
-              private router: Router) {
+  constructor(private router: Router, private store: Store<AppState>) {
   }
 
   ngOnInit() {
@@ -28,7 +28,8 @@ export class TodoCreateComponent implements OnInit {
       this.formCreateTodo.controls.name.value,
       this.formCreateTodo.controls.desc.value
     );
-    this.todoService.addTodo(this.todo);
+    console.log(this.todo);
+    this.store.dispatch(new AddTodo(this.todo));
     this.router.navigate(['todos', this.todo.id]);
   }
 

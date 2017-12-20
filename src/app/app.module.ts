@@ -6,10 +6,14 @@ import {TodoListComponent} from './todo-list/todo-list.component';
 import {TodoHeaderComponent} from './todo-header/todo-header.component';
 import {AppRoutingModule} from './app-routing.module';
 import {BrowserModule} from '@angular/platform-browser';
-import {LoggingServiceService} from './logging-service.service';
+import {LoggingServiceService} from './shared/logging-service.service';
 import {NgModule} from '@angular/core';
-import {TodoServiceService} from './todo-service.service';
 import {FormsModule} from '@angular/forms';
+import {StoreModule} from '@ngrx/store';
+import {StoreRouterConnectingModule} from '@ngrx/router-store';
+import {reducers} from './reducers/app.reducers';
+import {environment} from '../environments/environment';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
@@ -23,9 +27,12 @@ import {FormsModule} from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    StoreModule.forRoot(reducers),
+    StoreRouterConnectingModule,
+    !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
-  providers: [LoggingServiceService, TodoServiceService],
+  providers: [LoggingServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

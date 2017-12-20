@@ -1,8 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Todo} from '../todo';
-import {TodoServiceService} from '../todo-service.service';
+import {Todo} from '../shared/todo';
+import {Store} from '@ngrx/store';
+import {Observable} from 'rxjs/Observable';
+import {SelectTodo} from './store/actions/todo-list.actions';
+import {AppState} from '../reducers/app.reducers';
 import {Subscription} from 'rxjs/Subscription';
-import {LoggingServiceService} from '../logging-service.service';
 
 @Component({
   selector: 'app-todo-list',
@@ -10,42 +12,32 @@ import {LoggingServiceService} from '../logging-service.service';
   styleUrls: ['./todo-list.component.css']
 })
 export class TodoListComponent implements OnInit, OnDestroy {
-
-  selectedTodoObsSubscription: Subscription;
-  allTodosObsSubscription: Subscription;
-
+  todosState: Observable<{ todos: Todo[] }>;
   selectedTodo: Todo;
-  todos: Todo[];
+  selectedObsSubscriber: Subscription;
 
-  constructor(private todoService: TodoServiceService, private loggingService: LoggingServiceService) {
+  constructor(private store: Store<AppState>) {
   }
 
   ngOnInit() {
-
-    this.todos = this.todoService.getTodos();
-    this.selectedTodo = this.todos[0];
-
-    this.allTodosObsSubscription = this.todoService.todosChanged.subscribe(
-      (t: Todo[]) => {
-        this.todos = t;
+    this.todosState = this.store.select('todoList');
+    this.selectedObsSubscriber = this.store.select('todoList').subscribe(
+      (data) => {
+        this.selectedTodo = data.selectedTodo;
+        console.log('subscriber works');
       }
     );
-    this.selectedTodoObsSubscription = this.todoService.selectedTodoChanged.subscribe(
-      (todo: Todo) => {
-        this.loggingService.log('Selected ToDo changed , ID :' + todo.id);
-        this.selectedTodo = todo;
-      }
-    );
+
+
   }
 
   onSelectTodo(todo: Todo) {
-    console.log(todo);
-    this.todoService.selectedTodoChanged.next(todo);
+    this.store.dispatch(new SelectTodo(todo));
   }
 
   ngOnDestroy() {
-    this.loggingService.log('onDestroy ,unsubscribed! Subcriptions');
-    this.selectedTodoObsSubscription.unsubscribe();
-    this.allTodosObsSubscription.unsubscribe();
+    console.log('unsubscriber works')
+    this.selectedObsSubscriber.unsubscribe();
   }
+
 }

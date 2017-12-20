@@ -6,9 +6,9 @@ import {TodoDetailsComponent} from './todo-details/todo-details.component';
 import {TodoEditComponent} from './todo-edit/todo-edit.component';
 
 // const appRoutes: Routes = [
-//     {path: '', redirectTo: '/todos', pathMatch: 'full'},
+//     {path: '', redirectTo: '/todosState', pathMatch: 'full'},
 //     {
-//       path: 'todos', component: TodoListComponent, children: [
+//       path: 'todosState', component: TodoListComponent, children: [
 //       {path: 'new', component: TodoCreateComponent},
 //       {path: ':id', component: TodoDetailsComponent},
 //       {path: ':id/edit', component: TodoEditComponent}
