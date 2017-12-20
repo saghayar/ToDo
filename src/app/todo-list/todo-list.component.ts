@@ -15,6 +15,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
   todosState: Observable<{ todos: Todo[] }>;
   selectedTodo: Todo;
   selectedObsSubscriber: Subscription;
+  filterText: string;
 
   constructor(private store: Store<AppState>) {
   }

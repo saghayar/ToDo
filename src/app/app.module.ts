@@ -14,6 +14,7 @@ import {StoreRouterConnectingModule} from '@ngrx/router-store';
 import {reducers} from './reducers/app.reducers';
 import {environment} from '../environments/environment';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import { FilterPipe } from './filter.pipe';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {StoreDevtoolsModule} from '@ngrx/store-devtools';
     TodoEditComponent,
     TodoDetailsComponent,
     TodoListComponent,
-    TodoHeaderComponent
+    TodoHeaderComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

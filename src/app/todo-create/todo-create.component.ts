@@ -30,7 +30,7 @@ export class TodoCreateComponent implements OnInit {
     );
     console.log(this.todo);
     this.store.dispatch(new AddTodo(this.todo));
-    this.router.navigate(['todos', this.todo.id]);
+    this.router.navigate(['/todos']);
   }
 
 }
