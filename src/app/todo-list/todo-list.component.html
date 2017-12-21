@@ -11,29 +11,24 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="btn-group" role="group" aria-label="...">
-            <button type="button" class="btn btn-default"><a routerLinkActive="active"
-                                                             [routerLink]="['/todos/new']">Add</a>
-            </button>
-            <button type="button" class="btn btn-default"><a routerLinkActive="active"
-                                                             [routerLink]="['/todos/'+selectedTodo.id+'/edit']">Edit</a>
-            </button>
-            <button type="button" class="btn btn-default"><a routerLinkActive="active" (click)="onDeleteTodo()">Delete</a></button>
-            <button type="button" class="btn btn-default"><a routerLinkActive="active"
-                                                             [routerLink]="selectedTodo.id">Show details </a></button>
-            &nbsp; <span>of {{selectedTodo.name}}</span>
-        </div>
-    </div>
 
-    <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown" appDropdown>
-            <a style="cursor: pointer;" class="dropdown-toggle" role="button">Manage <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-                <li><a style="cursor: pointer;">Save Data</a></li>
-                <li><a style="cursor: pointer;">Fetch Data</a></li>
-            </ul>
-        </li>
-    </ul>
+    <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Manage
+            <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+            <li>
+                <a routerLinkActive="active" [routerLink]="['/todos/new']">Add</a>
+            </li>
+            <li>
+                <a routerLinkActive="active" [routerLink]="['/todos/'+selectedTodo.id+'/edit']">Edit</a>
+            </li>
+            <li>
+                <a routerLinkActive="active" (click)="onDeleteTodo()">Delete</a>
+            </li>
+            <li>
+                <a routerLinkActive="active" [routerLink]="selectedTodo.id">Show details </a>
+            </li>
+        </ul>
+    </div>
 
 </div>
