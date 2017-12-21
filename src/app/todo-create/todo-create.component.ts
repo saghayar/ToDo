@@ -7,30 +7,30 @@ import {AppState} from '../reducers/app.reducers';
 import {AddTodo} from '../todo-list/store/actions/todo-list.actions';
 
 @Component({
-  selector: 'app-todo-create',
-  templateUrl: './todo-create.component.html',
-  styleUrls: ['./todo-create.component.css']
+    selector: 'app-todo-create',
+    templateUrl: './todo-create.component.html',
+    styleUrls: ['./todo-create.component.css']
 })
 export class TodoCreateComponent implements OnInit {
 
-  todo: Todo;
-  @ViewChild('f') formCreateTodo: NgForm;
+    todo: Todo;
+    @ViewChild('f') formCreateTodo: NgForm;
 
-  constructor(private router: Router, private store: Store<AppState>) {
-  }
+    constructor(private router: Router, private store: Store<AppState>) {
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
-  onSubmit() {
-    this.todo = new Todo(
-      +this.formCreateTodo.controls.id.value,
-      this.formCreateTodo.controls.name.value,
-      this.formCreateTodo.controls.desc.value
-    );
-    console.log(this.todo);
-    this.store.dispatch(new AddTodo(this.todo));
-    this.router.navigate(['/todos']);
-  }
+    onSubmit() {
+        this.todo = new Todo(
+            Math.random(),
+            this.formCreateTodo.controls.name.value,
+            this.formCreateTodo.controls.desc.value
+        );
+        console.log(this.todo);
+        this.store.dispatch(new AddTodo(this.todo));
+        this.router.navigate(['/todos']);
+    }
 
 }
