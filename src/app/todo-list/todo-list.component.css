@@ -1,3 +1,11 @@
 .selectedItem {
-  background-color: cadetblue;
+  background-color: #5cb85c;
+}
+
+.nonCompleted {
+  text-decoration: line-through;
+}
+
+a{
+  cursor: pointer;
 }

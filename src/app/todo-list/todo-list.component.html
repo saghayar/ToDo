@@ -1,34 +1,47 @@
 <div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <ul class="list-group" *ngFor="let todo of ((todosState | async).todos) | filter:filterText:'name'">
-                <li class="list-group-item"
-                    (click)="onSelectTodo(todo)"
-                    [ngClass]="{'selectedItem': selectedTodo.id === todo.id}">
-                    {{todo.name}}
-                </li>
-            </ul>
-        </div>
+  <div class="row">
+    <div class="col-md-6">
+      <ul class="list-group" *ngFor="let todo of todos">
+        <li class="list-group-item"
+            (click)="onSelectTodo(todo)"
+            [ngClass]="{'selectedItem': selectedTodo.id === todo.id}"
+            [ngStyle]="{'textDecoration' : !todo.completed? 'line-through' :'none'}"
+        >
+          {{todo.name}} <input type="checkbox" class=" pull-right" [checked]="todo.completed"
+                               (change)="onChangeStatus()">
+        </li>
+      </ul>
     </div>
+  </div>
 
 
-    <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Manage
-            <span class="caret"></span></button>
-        <ul class="dropdown-menu">
-            <li>
-                <a routerLinkActive="active" [routerLink]="['/todos/new']">Add</a>
-            </li>
-            <li>
-                <a routerLinkActive="active" [routerLink]="['/todos/'+selectedTodo.id+'/edit']">Edit</a>
-            </li>
-            <li>
-                <a routerLinkActive="active" (click)="onDeleteTodo()">Delete</a>
-            </li>
-            <li>
-                <a routerLinkActive="active" [routerLink]="selectedTodo.id">Show details </a>
-            </li>
-        </ul>
-    </div>
+  <div class="dropdown">
+    <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">Manage
+      <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+      <li>
+        <a routerLinkActive="active" [routerLink]="['/todos/new']">Add</a>
+      </li>
+      <li>
+        <a routerLinkActive="active" [routerLink]="['/todos/'+selectedTodo.id+'/edit']">Edit</a>
+      </li>
+      <li>
+        <a routerLinkActive="active" (click)="onDeleteTodo()">Delete</a>
+      </li>
+      <li>
+        <a routerLinkActive="active" [routerLink]="selectedTodo.id">Show details </a>
+      </li>
+      <li>
+        <a (click)="showCompleted()">Completed </a>
+      </li>
+      <li>
+        <a (click)="showUnCompleted()">UnCompleted </a>
+      </li>
+      <li>
+        <a (click)="showAll()">All </a>
+      </li>
+    </ul>
+  </div>
+
 
 </div>

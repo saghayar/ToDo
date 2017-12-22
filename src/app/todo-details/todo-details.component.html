@@ -1,17 +1,21 @@
-<div class="row">
-  <!--<div class="col-md-1">   <p>Details!</p></div>-->
-  <div class="col-md-1">
-    <button class="btn-primary"><a [ngStyle]="{color:'white'}" class="glyphicon glyphicon-arrow-left"
-                                   [routerLink]="['/todos']"> </a></button>
+<div *ngIf="todo ;else defaultTemp">
+  <div class="row">
+    <div class="col-md-1">
+      <button class="btn-primary"><a [ngStyle]="{color:'white'}" class="glyphicon glyphicon-arrow-left"
+                                     [routerLink]="['/todos']"> </a></button>
+    </div>
   </div>
-</div>
-<div class="row">
+  <div class="row">
 
-  <div class="col-md-10">
-    <ul class="list-group">
-      <li class="list-group-item"><label>ID &nbsp; </label>{{todo.id}}</li>
-      <li class="list-group-item"><label>Name &nbsp;</label>{{todo.name}}</li>
-      <li class="list-group-item"><label>Description &nbsp; </label>{{todo.description}}</li>
-    </ul>
+    <div class="col-md-6">
+      <ul class="list-group">
+        <li class="list-group-item"><label>ID &nbsp; </label>{{todo.id}}</li>
+        <li class="list-group-item"><label>Name &nbsp;</label>{{todo.name}}</li>
+        <li class="list-group-item"><label>Description &nbsp; </label>{{todo.description}}</li>
+      </ul>
+    </div>
   </div>
 </div>
+<ng-template #defaultTemp>
+  <span>INVALID TODO</span>
+</ng-template>

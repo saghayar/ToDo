@@ -26,7 +26,8 @@ export class TodoCreateComponent implements OnInit {
         this.todo = new Todo(
             Math.random(),
             this.formCreateTodo.controls.name.value,
-            this.formCreateTodo.controls.desc.value
+            this.formCreateTodo.controls.desc.value,
+            false
         );
         console.log(this.todo);
         this.store.dispatch(new AddTodo(this.todo));
